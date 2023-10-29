@@ -9,6 +9,8 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
 .container {
   width: 70vw;
   height: 90vh;
@@ -16,6 +18,8 @@
   border-radius: 10px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.8);
 }
+
+
 .title {
   color: #fff;
   font-size: 30px;
@@ -117,6 +121,15 @@
   cursor: pointer;
   margin-top: 5px;
 }
+.icon-edit-todo {
+  background: blue;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
 .progress_card {
   width: 95%;
   height: auto;
@@ -148,4 +161,14 @@
 
 .card_text {
   margin: auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin: 0 10px;
+  }
+  .todo_title {
+    font-size: 18px;
+  }
 }
