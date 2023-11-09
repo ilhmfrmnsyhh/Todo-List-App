@@ -1,70 +1,183 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Dokumentasi API - CRUD To-Do List
 
-## Available Scripts
+#### 1. Daftar Semua To-Do List
 
-In the project directory, you can run:
+- **Endpoint:** `GET /api/todos`
+- **Deskripsi:** Mendapatkan semua daftar To-Do List.
+- **Authorization:** Diperlukan (Token JWT)
 
-### `npm start`
+**Response 200 OK:**
+```json
+[
+  {
+    "id": "12345",
+    "title": "Beli Bahan Makanan",
+    "completed": false
+  },
+  {
+    "id": "67890",
+    "title": "Buat Presentasi",
+    "completed": true
+  }
+]
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### 2. Mendapatkan To-Do by ID
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Endpoint:** `GET /api/todos/:id`
+- **Deskripsi:** Mendapatkan To-Do berdasarkan ID.
+- **Authorization:** Diperlukan (Token JWT)
 
-### `npm test`
+**Response 200 OK:**
+```json
+{
+  "_id": "654bc6605309a92bf3c0abc5",
+  "createdBy": "654bbf282de5d0df6d9e0bf8",
+  "title": "Membuat contoh asd",
+  "progress": false,
+  "completed": false,
+  "createdAt": "2023-11-08T17:33:20.523Z",
+  "updatedAt": "2023-11-08T17:33:20.523Z",
+  "__v": 0
+}
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 3. Membuat To-Do Baru
 
-### `npm run build`
+- **Endpoint:** `POST /api/todos`
+- **Deskripsi:** Membuat To-Do baru.
+- **Authorization:** Diperlukan (Token JWT)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Request Body:**
+```json
+{
+  "title": "Membuat contoh asd",
+  "progress": true,
+  "completed": false
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Response 201 Created:**
+```json
+{
+  "createdBy": "654bbf282de5d0df6d9e0bf8",
+  "title": "Membuat contoh asd",
+  "progress": false,
+  "completed": false,
+  "_id": "654bc6605309a92bf3c0abc5",
+  "createdAt": "2023-11-08T17:33:20.523Z",
+  "updatedAt": "2023-11-08T17:33:20.523Z",
+  "__v": 0
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 4. Memperbarui To-Do
 
-### `npm run eject`
+- **Endpoint:** `PUT /api/todos/:id`
+- **Deskripsi:** Memperbarui To-Do berdasarkan ID.
+- **Authorization:** Diperlukan (Token JWT)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Request Body:**
+```json
+{
+  "title": "Tugas Baru yang Diubah s23",
+  "progress": false,
+  "completed": true
+}
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Response 200 OK:**
+```json
+{
+  "_id": "654bbf342de5d0df6d9e0bfb",
+  "createdBy": "654bbf282de5d0df6d9e0bf8",
+  "title": "Tugas Baru yang Diubah s23",
+  "progress": false,
+  "completed": true,
+  "createdAt": "2023-11-08T17:02:44.028Z",
+  "updatedAt": "2023-11-08T17:16:24.618Z",
+  "__v": 0
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 5. Hapus To-Do by ID
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Endpoint:** `DELETE /api/todos/:id`
+- **Deskripsi:** Hapus To-Do berdasarkan ID.
+- **Authorization:** Diperlukan (Token JWT)
 
-## Learn More
+**Response 200 OK:**
+```json
+{
+  "message": "Todo berhasil dihapus",
+  "deletedTodo": {
+    "_id": "654bc4de383475e0ea374993",
+    "createdBy": "654bbf282de5d0df6d9e0bf8",
+    "title": "Membuat contoh asd",
+    "progress": false,
+    "completed": false,
+    "createdAt": "2023-11-08T17:26:54.356Z",
+    "updatedAt": "2023-11-08T17:26:54.356Z",
+    "__v": 0
+  }
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 6. Hapus Semua To-Do Pengguna
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Endpoint:** `DELETE /api/todos`
+- **Deskripsi:** Hapus semua To-Do spesifik pengguna.
+- **Authorization:** Diperlukan (Token JWT)
 
-### Code Splitting
+**Response 200 OK:**
+```json
+{
+  "message": "Semua Todo pengguna berhasil dihapus"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Dokumentasi API - Sign Up dan Sign In
 
-### Analyzing the Bundle Size
+#### 1. Registrasi Pengguna (Sign Up)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Endpoint:** `POST /api/auth/signup`
+- **Deskripsi:** Mendaftarkan pengguna baru.
 
-### Making a Progressive Web App
+**Request Body:**
+```json
+{
+  "username": "contohuser2",
+  "email": "contohuser2@example.com",
+  "password": "passwordku"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Response 201 Created:**
+```json
+{
+  "_id": "654bc22f8b07ae85351c54e7",
+  "email": "contohuser2@example.com"
+}
+```
 
-### Advanced Configuration
+#### 2. Masuk (Sign In) dan Dapatkan Token JWT
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **Endpoint:** `POST /api/auth/signin`
+- **Deskripsi:** Memungkinkan pengguna masuk dan mendapatkan token JWT.
 
-### Deployment
+**Request Body:**
+```json
+{
+  "email": "contohuser@example.com",
+  "password": "passwordku"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Response 200 OK:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
